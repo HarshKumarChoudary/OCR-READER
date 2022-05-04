@@ -1,0 +1,50 @@
+<!doctype html>
+<title>OCR</title>
+<div>
+    <center>
+        <h1>
+            This is an OCR Reader. Upload your file to be analyzed
+        </h1>
+    </center>
+</div>
+<div style="text-align: center;">
+    <h2>Select a file to upload</h2>
+    <p>
+        {% with messages = get_flashed_messages() %}
+	  {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+	{% endwith %}
+    </p>
+    <form method="post" action="/" enctype="multipart/form-data">
+        <dl>
+            <p>
+                <input
+                    type="file"
+                    name="file"
+                    autocomplete="off"
+                    required
+                >
+            </p>
+        </dl>
+        <p>
+            <input type="submit" value="Submit">
+        </p>
+    </form>
+</div>
+<div style="text-align: center; justify-content: space-between;">
+    {% if filename %}
+    <div>
+        <img src="{{ url_for('display_image', filename=filename) }}">
+    </div>
+    {% endif %}
+    {% if result %}
+    <div>
+        <img src="{{ url_for('display_image', filename=result) }}">
+    </div>
+    {% endif %}
+</div>
